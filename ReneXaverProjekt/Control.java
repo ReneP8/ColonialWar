@@ -1,10 +1,9 @@
 import javafx.scene.input.KeyCode;
 
-
 public class Control {
 	/*
-	 * der eigentliche Arbeitskern des Programmes. hier und nur hier fügt sich
-	 * alles zusammen. der einzige direkte Kontakt zum Server
+	 * der eigentliche Arbeitskern des Programmes. hier und nur hier fügt sich alles
+	 * zusammen. der einzige direkte Kontakt zum Server
 	 */
 	Map zCurrentMap;
 	Player zPlayer1 = new Player();
@@ -100,8 +99,8 @@ public class Control {
 	public void move(int pToX, int pToY) {
 		/*
 		 * Bewegt die aktuelle Unit; zu X Y; WENN ZielFeld Pair nicht leer UND
-		 * (pair.isEmpty ODER Kampf gewonnen); DANN mache deinen Zug MoveEnergy
-		 * -1; Falls Kampf Verloren und nicht leer
+		 * (pair.isEmpty ODER Kampf gewonnen); DANN mache deinen Zug MoveEnergy -1;
+		 * Falls Kampf Verloren und nicht leer
 		 */
 		// System.out.print("OUPS");
 		int lOldX = zCurrentUnit.getXPosition();
@@ -120,7 +119,8 @@ public class Control {
 					// Spielfelds
 				}
 				// funktioniert noch nicht richtig :)
-			} else if (zCurrentFightManager.inFight(zCurrentMap.getPair(lOldX, lOldY).getSecond(), zPair.getSecond()) && zCurrentUnit.getMoveEnergy() != 0) {
+			} else if (zCurrentUnit.getMoveEnergy() != 0
+					&& zCurrentFightManager.inFight(zCurrentMap.getPair(lOldX, lOldY).getSecond(), zPair.getSecond())) {
 				// gewonnener Kampf :)
 				// zCurrentMap.removeUnit(pToX, pToY);
 				// zCurrentMap.moveUnit(pToX, pToY, lOldX, lOldY, zCurrentUnit);
@@ -139,10 +139,16 @@ public class Control {
 		// aufpassen: Fall, dass einer keine Armee mehr hat ist noch nicht
 		// implementiert! Das muss noch geklärt werden
 		// aus irgendwelchen Gründen erhält es einen Aufruf am Anfang warum =?
-		System.out.println("NEXT");
-		if (zCurrentPlayer.hasAccess())
-			zCurrentUnit = zCurrentPlayer.getNext();
-			//System.out.println("access");
+		System.out.println("NEXT Unit");
+		if (zCurrentPlayer.hasAccess()) {
+			if (zCurrentUnit.getMoveEnergy() > 0)
+				zCurrentUnit = zCurrentPlayer.getNext();
+			while (zCurrentUnit.getMoveEnergy() <= 0 && zCurrentPlayer.hasAccess()) {
+				zCurrentUnit = zCurrentPlayer.getNext();
+			}
+
+		}
+		// System.out.println("access");
 		else if (!zCurrentPlayer.hasAccess() && !zCurrentPlayer.getzEnergyLeft()) {
 			if (zPlayer2.equals(zCurrentPlayer)) {
 				zCurrentPlayer = zPlayer1;
@@ -150,19 +156,22 @@ public class Control {
 				zCurrentPlayer.setzCurrentUnitIndex(0);
 				zCurrentUnit = zCurrentPlayer.getNext();
 				zCurrentPlayer.refreshAllUnitsEnergy();
+				zCurrentPlayer.setzEnergyLeft(false);
 			} else {
 				zCurrentPlayer = zPlayer2;
 				zCurrentPlayer.setzCurrentUnitIndex(0);
 				zCurrentUnit = zCurrentPlayer.getNext();
 				System.out.println("PL>2");
 				zCurrentPlayer.refreshAllUnitsEnergy();
+				zCurrentPlayer.setzEnergyLeft(false);
 			}
 		} else {
+			System.out.println("FUYA");
+			zCurrentPlayer.setzEnergyLeft(false);
 			zCurrentPlayer.setzCurrentUnitIndex(0);
 			zCurrentUnit = zCurrentPlayer.getNext();
 		}
 		// error condition
-
 	}
 
 	public void lineSetUp() {

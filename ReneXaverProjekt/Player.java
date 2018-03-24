@@ -16,6 +16,8 @@ public class Player {
 		if(!zUnitList.isEmpty()) {
 			Unit lCurrentUnit = zUnitList.get(zCurrentUnitIndex);
 			zCurrentUnitIndex++;
+			System.out.println(lCurrentUnit);
+//			System.out.println(lCurrentUnit);
 //			System.out.println(zUnitList.size()-1);
 //			System.out.println(zCurrentUnitIndex);
 			return lCurrentUnit;

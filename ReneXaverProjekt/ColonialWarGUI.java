@@ -21,8 +21,6 @@ public class ColonialWarGUI extends Application implements EventHandler<ActionEv
 	private Scene zGameScene;
 	// behelfs
 	private Control zMyControl = new Control(this);
-	
-	
 
 	// Einzige auf gabe ist die Visuelle Darstellung der physischen Objekte!
 	// Wird durch den ColonialWarClient angesprochen ~
@@ -46,7 +44,7 @@ public class ColonialWarGUI extends Application implements EventHandler<ActionEv
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		zWindow = primaryStage;
-		
+
 	}
 
 	// When zButton is clicked, handle() gets called
@@ -71,12 +69,12 @@ public class ColonialWarGUI extends Application implements EventHandler<ActionEv
 	}
 
 	public void fullUpdate() {
-		//setUp GUI
-		//zMapGroup := Background/Map GUI
-		//zMyGroup  := Die Sicht der Units
+		// setUp GUI
+		// zMapGroup := Background/Map GUI
+		// zMyGroup := Die Sicht der Units
 		Group zRoot = new Group(zMapGroup, zMyGroup);
 		zGameScene = new Scene(zRoot, 400, 400);
-		//initialise KeyEvent
+		// initialise KeyEvent
 		zGameScene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			if (key.getCode().isDigitKey())
 				zMyControl.getUserInput(key.getCode());
@@ -91,17 +89,19 @@ public class ColonialWarGUI extends Application implements EventHandler<ActionEv
 				}
 			}
 		});
-		//set Scene
+		// set Scene
 		zWindow.setScene(zGameScene);
 	}
+
 	public void reset() {
-		//cleare all Unit pics;
+		// cleare all Unit pics;
 		zMyGroup.getChildren().clear();
 	}
 
 	public void createPartialUpdate(int pValueX, int pValueY) {
-		//erstellePartialPicture (später benötigen wir ein ImageVault und müssen das so zuordnen);
-		Rectangle lRect = new Rectangle(pValueX * 30 + 17.5, pValueY  * 30 + 17.5, 15, 15);
+		// erstellePartialPicture (später benötigen wir ein ImageVault und müssen das so
+		// zuordnen);
+		Rectangle lRect = new Rectangle(pValueX * 30 + 17.5, pValueY * 30 + 17.5, 15, 15);
 		lRect.setFill(Color.RED);
 		lRect.setStroke(Color.BLACK);
 		lRect.setStrokeWidth(2);

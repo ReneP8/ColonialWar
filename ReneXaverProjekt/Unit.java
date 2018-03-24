@@ -116,7 +116,7 @@ public class Unit {
     if (this.zATK > 0) {
       part1 = part1 + "\nDistATK = " + this.zATK;
     } // end of if
-    part1 = part1 + "\nDistDEF = " + this.zDistDEF + "\nRichtung = " + this.zDirection + "\nPosition (X,Y) = (" + this.getXPosition() + "," + this.getYPosition() + ")";
+    part1 = part1 + "\nDistDEF = " + this.zDistDEF + "\nRichtung = " + this.zDirection + "\nPosition (X,Y) = (" + this.getXPosition() + "," + this.getYPosition() + ")" + "\nMoveEnergy" + this.zMoveEnergy;
     return part1;
   }
 }
