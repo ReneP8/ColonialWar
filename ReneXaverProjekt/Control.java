@@ -154,22 +154,24 @@ public class Control {
 				zCurrentPlayer = zPlayer1;
 				System.out.print("PLAYA1");
 				zCurrentPlayer.setzCurrentUnitIndex(0);
-				zCurrentUnit = zCurrentPlayer.getNext();
+//				zCurrentUnit = zCurrentPlayer.getNext();
 				zCurrentPlayer.refreshAllUnitsEnergy();
 				zCurrentPlayer.setzEnergyLeft(false);
+				getNextUnit();
 			} else {
 				zCurrentPlayer = zPlayer2;
 				zCurrentPlayer.setzCurrentUnitIndex(0);
-				zCurrentUnit = zCurrentPlayer.getNext();
+//				zCurrentUnit = zCurrentPlayer.getNext();
 				System.out.println("PL>2");
 				zCurrentPlayer.refreshAllUnitsEnergy();
 				zCurrentPlayer.setzEnergyLeft(false);
+				getNextUnit();
 			}
 		} else {
 			System.out.println("FUYA");
 			zCurrentPlayer.setzEnergyLeft(false);
 			zCurrentPlayer.setzCurrentUnitIndex(0);
-			zCurrentUnit = zCurrentPlayer.getNext();
+			getNextUnit();
 		}
 		// error condition
 	}
